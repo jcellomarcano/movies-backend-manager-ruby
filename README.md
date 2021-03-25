@@ -4,12 +4,12 @@ Es un sistema de Alquiler y Venta de peliculas por streaming.
 
 ## :gear: Requerimientos
 
-Ruby
+:gem: Ruby
 
 ## :star2: Como correr
 
 ```shell
-Hello from the other say
+ruby main.rb
 ```
 
 ## :balloon: Como usar
@@ -55,21 +55,37 @@ El JSON debe tener el siguiente formato
 
 - Usar cualquiera de las siguientes funciones.
 
-1. Crear nueva orden de alquiler
-2. Crear nueva orden de compra
-3. Mi Usuario
-4. Consultar catálogo
-    4.1. Mostrar todas
-    4.2. Filtrar
-        4.2.1. Nombre
-        4.2.2. Ano
-        4.2.3. Nombre de director
-        4.2.4. Nombre de actor
-        4.2.5. Duracion
-        4.2.6. Categorias
-        4.2.7. Precio de compra
-        4.2.8. Precio de alquiler
+    1. Crear nueva orden de alquiler
 
-        4.2.9. Aplicar otro filtro
-        4.2.10. Buscar
+    2. Crear nueva orden de compra
+
+    3. Mi Usuario
+
+    4. Consultar catálogo
+
+        4.1. Mostrar todas
+
+        4.2. Filtrar
+
+            1. Nombre
+
+            2. Ano
+
+            3. Nombre de director
+
+            4. Nombre de actor
+
+            5. Duracion
+
+            6. Categorias
+
+            7. Precio de compra
+
+            8. Precio de alquiler
+
+
+            9. Aplicar otro filtro
+
+            10. Buscar
+
 5. Salir
