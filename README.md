@@ -6,13 +6,13 @@ Es un sistema de Alquiler y Venta de peliculas por streaming.
 
 :gem: Ruby
 
-## :star2: Como correr
+## Como correr
 
 ```shell
 ruby main.rb
 ```
 
-## :balloon: Como usar
+## :star2: Como usar
 
 - Primero insertar la direccion de un archivo JSON con los datos de la aplicacion.
 
@@ -63,9 +63,9 @@ El JSON debe tener el siguiente formato
 
     4. Consultar catálogo
 
-        4.1. Mostrar todas
+        1. Mostrar todas
 
-        4.2. Filtrar
+        2. Filtrar
 
             1. Nombre
 
@@ -88,4 +88,4 @@ El JSON debe tener el siguiente formato
 
             10. Buscar
 
-5. Salir
+    5. Salir
