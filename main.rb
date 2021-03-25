@@ -14,10 +14,10 @@ class Main
     puts "**************************"
     puts "Bienvenido a Lambdabuster\n"
 
-    while TRUE
+    while true
         path = self.get_path()
-        charge_data = TRUE #Funcion que carga los datos
-        if charge_data = FALSE
+        charge_data = true #Funcion que carga los datos
+        if charge_data = false
             puts "\nLo sentimos, no pudimos cargar los datos :("
             puts "\nAsegurate de haber colocado la ruta retaliva"
             puts "y la estructura del archivo correcta para el programa"
@@ -34,7 +34,7 @@ class Main
         end
     end
 
-    while TRUE
+    while true
         puts "\nQue accion quiere realizar?"
         puts "1. Crear nueva orden de alquiler"
         puts "2. Crear nueva orden de compra"
