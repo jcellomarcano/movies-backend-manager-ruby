@@ -17,7 +17,7 @@ class Main
     while true
         path = self.get_path()
         charge_data = true #Funcion que carga los datos
-        if charge_data = false
+        if charge_data == false
             puts "\nLo sentimos, no pudimos cargar los datos :("
             puts "\nAsegurate de haber colocado la ruta retaliva"
             puts "y la estructura del archivo correcta para el programa"
