@@ -4,7 +4,7 @@ Es un sistema de Alquiler y Venta de peliculas por streaming.
 
 ## :gear: Requerimientos
 
-:gem: Ruby
+:gem: Ruby (Version 3.0.0p0)
 
 ## Como correr
 
