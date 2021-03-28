@@ -43,17 +43,3 @@ class SearchList
         end
     end
 end
-
-
-directors=SearchList.new(Person.new(
-"Martin Charles Scorsese",
-Date.new(1942,11,17),
-"United States"
-),
-Person.new(
-"Cristopher Edward Nolan",
-Date.new(1970,7,30),
-"United Kingdom"
-))
-
-
