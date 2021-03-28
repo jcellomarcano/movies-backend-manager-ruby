@@ -13,7 +13,7 @@ class Person
         @name  
     end
 end
-module Person
+module PersonType
     class Actor < Person
         def initialize(name, birthday, nationality, starred_in = nil)
             super(name, birthday, nationality)
@@ -21,7 +21,7 @@ module Person
         end
     end
 
-    class Director < Person::Person
+    class Director < Person
         def initialize(name, birthday, nationality, directed = nil )
             super(name, birthday, nationality)
             @directed = directed
@@ -34,6 +34,10 @@ module Person
     
 end
 
+director = PersonType::Director.new("LaGordita", 1996-12-31,"VE")
+puts director.name
+puts director.birthday
+puts director.nationality
 
 
 
