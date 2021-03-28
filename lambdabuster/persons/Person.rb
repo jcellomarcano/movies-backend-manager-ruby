@@ -4,5 +4,9 @@ class Person
         @birthday = birthday
         @nationality = nationality
     end
+
+    def to_s
+        @name
+    end
 end
 

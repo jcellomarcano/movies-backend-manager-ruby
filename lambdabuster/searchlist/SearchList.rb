@@ -1,18 +1,55 @@
+require_relative '../persons/Person'
+require 'date'
+
 class SearchList
-    def i n i t i a l i z e ( ? ? ? )
-    ???
+    def initialize(*args)
+        @list=args
     end
-    def <<(elem )
-    @ l i s t << elem
-    self
+    def <<(elem)
+        @list << elem
+        self
     end
     def to_s
-    ???
+        string=""
+        for elem in @list
+            string = string+ elem.to_s + ", "
+        end
+        string[0..-3]
     end
-    def +( o t h e r )
-    ???
+    def +(other)
+        base=SearchList.new(*@list)
+        other.each do |x|
+            base << x
+        end
+        base
     end
-    def each ( ∗ a r g s , &b l o c k )
-    @ l i s t . each ( ∗ a r g s , &b l o c k )
+    def each(*args, &block)
+        @list.each(*args, &block)
     end
+
+    def scan(atom, &block)
+        
     end
+end
+
+hola = SearchList.new(2,5,3)
+hola<<8
+puts "#{hola.to_s}"
+p=Person.new("Martin Charles Scorsese",Date.new(1942,11,17),"United States")
+puts "#{p.to_s}"
+directors=SearchList.new(Person.new(
+"Martin Charles Scorsese",
+Date.new(1942,11,17),
+"United States"
+),
+Person.new(
+"Cristopher Edward Nolan",
+Date.new(1970,7,30),
+"United Kingdom"
+))
+directors.each do |x|
+    puts "#{x}"
+  end
+nueva=directors+hola
+puts "Nueva: #{nueva.to_s}"
+puts "Directors: #{directors.to_s}"
