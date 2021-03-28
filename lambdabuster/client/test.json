@@ -1,8 +1,12 @@
 {
     "directors": [{
-        "name": "String. Nombre del director",
-        "birthday": "Date. Fecha de nacimiento del director, en formato ISO 8601",
-        "nationality": "String. País de nacimiento del director"
+        "name": "Rajkumar Hirani",
+        "birthday": "1962-11-20",
+        "nationality": "Indian"
+    }, {
+        "name": "Wes Anderson",
+        "birthday": "1969-05-01",
+        "nationality": "United States"
     }],
     "actors": [{
         "name": "String. Nombre del actor",
