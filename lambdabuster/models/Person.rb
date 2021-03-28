@@ -15,6 +15,7 @@ class Person
 end
 module PersonType
     class Actor < Person
+        attr_accessor :starred_in
         def initialize(name, birthday, nationality, starred_in = nil)
             super(name, birthday, nationality)
             @starred_in = starred_in
@@ -22,22 +23,20 @@ module PersonType
     end
 
     class Director < Person
+        attr_accessor :directed
         def initialize(name, birthday, nationality, directed = nil )
             super(name, birthday, nationality)
             @directed = directed
-        end
-        def test 
-            puts "Test"
         end
 
     end
     
 end
 
-director = PersonType::Director.new("LaGordita", 1996-12-31,"VE")
-puts director.name
-puts director.birthday
-puts director.nationality
+# director = PersonType::Director.new("LaGordita", 1996-12-31,"VE")
+# puts director.name
+# puts director.birthday
+# puts director.nationality
 
 
 
