@@ -1,6 +1,7 @@
 require 'json'
-require_relative '../models/Person'
+# require_relative '../models/Person'
 require_relative '../models/SearchList'
+require_relative '../models/Movie'
 line = "./test.json"
 def readJson(path) 
     directorsList = SearchList.new()
@@ -17,6 +18,10 @@ def readJson(path)
         for actor in data_hash['actors']
             auxAct = PersonType::Actor.new(actor['name'],Date.parse(actor['birthday']), actor['nationality'])
             actorsList << auxAct
+        end
+        for movie in data_hash['movies']
+            # auxAct = PersonType::Actor.new(actor['name'],Date.parse(actor['birthday']), actor['nationality'])
+            # actorsList << auxAct
         end
     rescue # optionally: `rescue Exception => ex`
         result =  false
