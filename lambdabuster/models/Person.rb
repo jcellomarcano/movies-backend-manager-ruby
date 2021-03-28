@@ -5,7 +5,7 @@ class Person
     attr_accessor :name, :birthday, :nationality
     def initialize (name, birthday, nationality)
         @name = name
-        @birthday = Date.new(birthday)
+        @birthday = birthday
         @nationality = nationality
     end
 

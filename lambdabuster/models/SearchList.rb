@@ -1,4 +1,4 @@
-require_relative '../persons/Person'
+require_relative 'Person'
 require 'date'
 
 class SearchList
@@ -27,7 +27,8 @@ class SearchList
         @list.each(*args, &block)
     end
 
-    def scan(atom, &block)
+    def scan(atom:, &block)
+        new_search=SearchList.new()
         
     end
 end
@@ -53,3 +54,5 @@ directors.each do |x|
 nueva=directors+hola
 puts "Nueva: #{nueva.to_s}"
 puts "Directors: #{directors.to_s}"
+x=SearchList.new()
+puts "Directors: #{x.to_s}"
