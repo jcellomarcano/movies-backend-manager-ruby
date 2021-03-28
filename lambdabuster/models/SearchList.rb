@@ -2,6 +2,7 @@ require_relative 'Person'
 require 'date'
 
 class SearchList
+
     def initialize(*args)
         @list=args
     end
@@ -27,17 +28,23 @@ class SearchList
         @list.each(*args, &block)
     end
 
-    def scan(atom:, &block)
-        new_search=SearchList.new()
-        
+    def scan(atom, &block)
+        if not @list[0].class.method_defined? atom
+            raise "El elemento no tiene dicho atributo"
+        else
+            list=SearchList.new()
+            self.each do |x|
+                elem=[x.method(atom).call].select &block
+                if elem.length > 0
+                    list<<x 
+                end
+            end
+            list
+        end
     end
 end
 
-hola = SearchList.new(2,5,3)
-hola<<8
-puts "#{hola.to_s}"
-p=Person.new("Martin Charles Scorsese",Date.new(1942,11,17),"United States")
-puts "#{p.to_s}"
+
 directors=SearchList.new(Person.new(
 "Martin Charles Scorsese",
 Date.new(1942,11,17),
@@ -48,11 +55,5 @@ Person.new(
 Date.new(1970,7,30),
 "United Kingdom"
 ))
-directors.each do |x|
-    puts "#{x}"
-  end
-nueva=directors+hola
-puts "Nueva: #{nueva.to_s}"
-puts "Directors: #{directors.to_s}"
-x=SearchList.new()
-puts "Directors: #{x.to_s}"
+
+
