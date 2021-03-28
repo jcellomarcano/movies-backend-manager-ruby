@@ -1,17 +1,18 @@
-require Person
+require_relative "Person"
+module Director 
+    class Director < Person::Person
 
-class Director < Person
-    def initialize(name, birthday, nationality)
-        super(name)
-        super(birthday)
-        super(nationality)
-    end
-    def test 
-        puts "Test"
+        def initialize(name, birthday, nationality)
+            super(name, birthday, nationality)
+        end
+        def test 
+            puts "Test"
+        end
+
     end
 
 end
 
-directo = Director.new("Cameron", "23/12/1995","VE")
-puts directo.name
+directo = Director::Director.new("Cameron", 1996-07-02, "VE")
 puts directo.test
+directo.to_s
