@@ -33,26 +33,26 @@ class SearchList
     end
 end
 
-hola = SearchList.new(2,5,3)
-hola<<8
-puts "#{hola.to_s}"
-p=Person.new("Martin Charles Scorsese",Date.new(1942,11,17),"United States")
-puts "#{p.to_s}"
-directors=SearchList.new(Person.new(
-"Martin Charles Scorsese",
-Date.new(1942,11,17),
-"United States"
-),
-Person.new(
-"Cristopher Edward Nolan",
-Date.new(1970,7,30),
-"United Kingdom"
-))
-directors.each do |x|
-    puts "#{x}"
-  end
-nueva=directors+hola
-puts "Nueva: #{nueva.to_s}"
-puts "Directors: #{directors.to_s}"
-x=SearchList.new()
-puts "Directors: #{x.to_s}"
+# hola = SearchList.new(2,5,3)
+# hola<<8
+# puts "#{hola.to_s}"
+# p=Person.new("Martin Charles Scorsese",Date.new(1942,11,17),"United States")
+# puts "#{p.to_s}"
+# directors=SearchList.new(Person.new(
+# "Martin Charles Scorsese",
+# Date.new(1942,11,17),
+# "United States"
+# ),
+# Person.new(
+# "Cristopher Edward Nolan",
+# Date.new(1970,7,30),
+# "United Kingdom"
+# ))
+# directors.each do |x|
+#     puts "#{x}"
+#   end
+# nueva=directors+hola
+# puts "Nueva: #{nueva.to_s}"
+# puts "Directors: #{directors.to_s}"
+# x=SearchList.new()
+# puts "Directors: #{x.to_s}"
