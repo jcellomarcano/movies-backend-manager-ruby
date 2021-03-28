@@ -1,7 +1,6 @@
 require_relative "Person"
 module Director 
     class Director < Person::Person
-
         def initialize(name, birthday, nationality)
             super(name, birthday, nationality)
         end
@@ -14,5 +13,4 @@ module Director
 end
 
 directo = Director::Director.new("Cameron", 1996-07-02, "VE")
-puts directo.test
-directo.to_s
+puts directo.name
