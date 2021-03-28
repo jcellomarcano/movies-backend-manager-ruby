@@ -9,9 +9,13 @@
         "nationality": "United States"
     }],
     "actors": [{
-        "name": "String. Nombre del actor",
-        "birthday": "Date. Fecha de nacimiento del actor, en formato ISO 8601",
-        "nationality": "String. País de nacimiento del actor"
+        "name": "Robert DeNiro",
+        "birthday": "1943-08-17",
+        "nationality": "United States"
+    }, {
+        "name": "Jack Nicholson",
+        "birthday": "1937-04-22",
+        "nationality": "United States"
     }],
     "movies": [{
         "name": "String. Nombre de la película",
