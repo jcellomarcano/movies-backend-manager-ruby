@@ -42,4 +42,8 @@ class SearchList
             list
         end
     end
+
+    def length
+        @list.length
+    end
 end

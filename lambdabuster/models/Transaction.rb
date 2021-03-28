@@ -5,7 +5,7 @@ class Transaction
             @movie=movie
             @type=type
             @total=0
-            @date=Date.new(today)
+            @date=Date.today
         end
         include BuyOrder
         include RentOrder
