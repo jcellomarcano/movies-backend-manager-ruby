@@ -1,6 +1,11 @@
 require Person
 
 class Director < Person
+    def initialize(name, birthday, nationality)
+        super(name)
+        super(birthday)
+        super(nationality)
+    end
     def test 
         puts "Test"
     end
