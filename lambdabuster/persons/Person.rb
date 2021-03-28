@@ -9,7 +9,7 @@ module Person
         end
 
         def to_s 
-          puts @name  
+            @name  
         end
     end
     
