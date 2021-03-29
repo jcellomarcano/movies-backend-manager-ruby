@@ -239,7 +239,8 @@ class Movie
         movieFormat += @directors.to_s + "\n"
         movieFormat += "Cast: "
         movieFormat += @actors.to_s + "\n"
-        movieFormat
+        movieFormat.gsub! '[',''
+        movieFormat.gsub! ']',''
     end
 end
 
