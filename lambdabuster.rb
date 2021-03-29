@@ -312,10 +312,11 @@ def consult_movies(movies)
         puts ""
         puts "Inserta el numero de la opcion"
         option = gets.chomp.to_i
+        puts "Movies consult: #{movies}"
         case option
         when 1
             movies.each do |x|
-                x.name
+                puts x
             end
             break
         when 2
