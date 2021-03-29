@@ -217,9 +217,132 @@ def loadMovie(movieObj)
     movie
 end
 
+# CONSULT MOVIES
+def create_comparison_condition()
+    while true
+        puts "\n¿Con qué comparación?"
+        puts "1. Menor"
+        puts "2. Menor o igual"
+        puts "3. Igual"
+        puts "4. Mayor o igual"
+        puts "5. Mayor"
+        puts ""
+        puts "Inserta el numero de la opcion"
+        option = gets.chomp.to_i
+        case option
+        when 1
+            resp="<"
+            break
+        when 2
+            resp="<="
+            break
+        when 3
+            resp="=="
+            break
+        when 4
+            resp=">="
+            break
+        when 5
+            resp=">"
+            break
+        else
+            puts "\nPrueba una opcion valida :S"
+        end
+    end
+    resp
+end
+
+def create_coincidence_condition()
+    while true
+        puts "\n¿Con qué comparación?"
+        puts "1. Coincidencia exacta"
+        puts "2. Coincidencia pacial"
+        puts ""
+        puts "Inserta el numero de la opcion"
+        option = gets.chomp.to_i
+        case option
+        when 1
+        when 2
+        else
+            puts "\nPrueba una opcion valida"
+        end
+    end
+end
+
+def create_result_menu()
+    while true
+        puts "\n1. Aplicar otro filtro"
+        puts "2. Buscar"
+        puts ""
+        puts "Inserta el numero de la opcion"
+        option = gets.chomp.to_i
+        case option
+        when 1
+        when 2
+        else
+            puts "\nPrueba una opcion valida :3"
+        end
+    end
+end
+
+def consult_movies(movies):
+    while true
+        puts "\nQue accion quiere realizar?"
+        puts "1. Mostrar todas las peliculas"
+        puts "2. Filtrar"
+        puts ""
+        puts "Inserta el numero de la opcion"
+        option = gets.chomp.to_i
+        case option
+        when 1
+            movies.each do |x|
+                x.to_s
+            end
+        when 2
+            while true
+                puts "\n¿Que filtro quieres aplicar?"
+                puts "1. Nombre"
+                puts "2. Año"
+                puts "3. Nombre del director"
+                puts "4. Nombre del actor"
+                puts "5. Duracion"
+                puts "6. Categorias"
+                puts "7. Precio de compra"
+                puts "8. Precio de alquiler"
+                puts ""
+                puts "Inserta el numero de la opcion"
+                option = gets.chomp.to_i
+
+                case option
+                when 1
+                    resp=create_order(movies,type)
+                    break
+                when 2
+                    resp=1
+                    break
+                when 3
+                    puts "3. Consultar peli"
+                    break
+                when 4
+                    break
+                else
+                    puts "\nPrueba una opcion valida :3"
+                end
+            end
+        else
+            puts "\nPrueba una opcion valida"
+        end
+    end
+end
+
+
+
+
+
+
+
 
 class Main
-
     # FUNCTIONS
     def self.get_path
         puts "\nPor favor ingrese la direccion desde donde se cargaran los archivo"
