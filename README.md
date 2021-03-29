@@ -2,6 +2,12 @@
  
 Es un sistema de Alquiler y Venta de peliculas por streaming.
 
+Integrantes:
+* 12-10359 Jesús Marcano
+* 13-10787 María Fernanda Magallanes
+
+> Estado: casi listo :( solo nos faltó corregir lo del filtro por directores y actores
+
 ## :gear: Requerimientos
 
 :gem: Ruby (Version 3.0.0p0)
@@ -9,7 +15,7 @@ Es un sistema de Alquiler y Venta de peliculas por streaming.
 ## Como correr
 
 ```shell
-ruby main.rb
+ruby lambdabuster.rb
 ```
 
 ## :star2: Como usar

@@ -385,16 +385,10 @@ def consult_movies(movies)
                     my_name = gets.chomp
                     my_method=create_coincidence_condition()
                     if my_method == "=="
-                        puts "igualdad total"
-                        if movies.directors.include? my_name
-                            resp=movies.scan(:directors) { |x| x.include? my_name }
-                        else
-                            resp=SearchList.new()
-                        end
+                        resp=movies.scan(:directors) { |x| x.include? my_name }
                         puts resp
                     else
-                        puts "igualdad parcial"
-                        resp=movies.scan(:directors) { |x| x.include? my_name }
+                        resp=movies.scan(:directors) { |x| x.any? { |s| s.include? my_name } }
                         puts resp
                     end
                     op=create_result_menu(resp)
