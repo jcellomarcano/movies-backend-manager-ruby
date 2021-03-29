@@ -217,6 +217,7 @@ def loadMovie(movieObj)
     movie
 end
 
+
 class Main
 
     # FUNCTIONS
@@ -224,7 +225,22 @@ class Main
         puts "\nPor favor ingrese la direccion desde donde se cargaran los archivo"
         path = gets.chomp
     end
+    @user = User.new
+
+    #myUser
+    def myUser 
+        if @user.owned_movies.empty? && @user.rented_movies.empty?
+            self.clear()
+            puts "No has realizado transacciones en #{"Lambdabuster".bold()}"
+        end
+
+        puts "Listado de Peliculas alquiladas: " + "\n" + "#{@user.rented_movies}" 
+        puts "Listado de Peliculas compradas: " + "\n" + "#{@user.owned_movies}" 
+
+    end
+
     # MAIN
+    
 
     puts "**************************"
     puts "Bienvenido a Lambdabuster\n"
@@ -278,6 +294,8 @@ class Main
         end
 
     end
+
+
 
     
 end
