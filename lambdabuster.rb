@@ -274,7 +274,7 @@ def create_coincidence_condition()
     end
 end
 
-def create_result_menu()
+def create_result_menu(searchlist)
     while true
         puts "\n1. Aplicar otro filtro"
         puts "2. Buscar"
@@ -283,11 +283,16 @@ def create_result_menu()
         option = gets.chomp.to_i
         case option
         when 1
+            movies=resp
+            break
         when 2
+            resp.to_s
+            break
         else
             puts "\nPrueba una opcion valida :3"
         end
     end
+    option
 end
 
 def consult_movies(movies):
@@ -323,66 +328,125 @@ def consult_movies(movies):
                     puts "\nInserte el nombre:"
                     my_name = gets.chomp
                     my_method=create_coincidence_condition()
-                    movies.scan(:name) { |x| x.method(my_method).call my_name }
-                    break
+                    resp=movies.scan(:name) { |x| x.method(my_method).call my_name }
+                    op=create_result_menu(resp)
+                    if op == 2
+                        break
+                    end
                 when 2
                     puts "\nInserte el año:"
                     my_year = gets.chomp.to_i
                     my_method=create_comparison_condition()
-                    movies.scan(:date) { |x| x.year.method(my_method).call my_year }
-                    break
+                    resp=movies.scan(:date) { |x| x.year.method(my_method).call my_year }
+                    op=create_result_menu(resp)
+                    if op == 2
+                        break
+                    end
                 when 3
                     puts "\nInserte el nombre del director:"
                     my_name = gets.chomp
                     my_method=create_coincidence_condition()
                     if my_method == "=="
-                        movies.scan(:directors) { |x| x.include? my_name }
+                        resp=movies.scan(:directors) { |x| x.include? my_name }
                     else
-                        movies.scan(:directors) { |x| x.any? { |s| s.include? my_name } }
+                        resp=movies.scan(:directors) { |x| x.any? { |s| s.include? my_name } }
                     end
-                    break
+                    op=create_result_menu(resp)
+                    if op == 2
+                        break
+                    end
                 when 4
                     puts "\nInserte el nombre del actor:"
                     my_name = gets.chomp
                     my_method=create_coincidence_condition()
                     if my_method == "=="
-                        movies.scan(:directors) { |x| x.include? my_name }
+                        resp=movies.scan(:directors) { |x| x.include? my_name }
                     else
-                        movies.scan(:directors) { |x| x.any? { |s| s.include? my_name } }
+                        resp=movies.scan(:directors) { |x| x.any? { |s| s.include? my_name } }
                     end
-                    break
+                    op=create_result_menu(resp)
+                    if op == 2
+                        break
+                    end
                 when 5
                     puts "\nInserte la duracion:"
                     duration = gets.chomp.to_i
                     my_method=create_comparison_condition()
-                    movies.scan(:date) { |x| x.method(my_method).call duration }
-                    break
+                    resp=movies.scan(:date) { |x| x.method(my_method).call duration }
+                    op=create_result_menu(resp)
+                    if op == 2
+                        break
+                    end
                 when 6
-                    # puts "\nInserte el nombre del actor:"
-                    # my_name = gets.chomp
-                    # my_method=create_coincidence_condition()
-                    # if my_method == "=="
-                    #     movies.scan(:directors) { |x| x.include? my_name }
-                    # else
-                    #     movies.scan(:directors) { |x| x.any? { |s| s.include? my_name } }
-                    # end
-                    # break
+                    filter_categories=Set.new()
+                    while true
+                        puts "\nSeleccione una categoria:"
+                        counter=1
+                        my_categories.each do |x|
+                            puts "#{counter}. #{x}"
+                            my_list_of_categies<<x
+                            counter=counter+1
+                        end
+                        option = gets.chomp.to_i
+                        if option > my_categories.length
+                            puts "\nElige una opcion valida"
+                        else
+                            my_category=my_list_of_categies[option-1]
+                            resp=movies.scan(:categories).select {|x| x.include? my_category}
+                            while true
+                                puts "\nQuieres seleccionar otra categoria?"
+                                puts "1. Si"
+                                puts "2. No"
+                                puts ""
+                                puts "Inserta el numero de la opcion"
+                                option = gets.chomp.to_i
+                                case option
+                                when 1
+                                    op=1
+                                    break
+                                when 2
+                                    op=2
+                                    break
+                                else
+                                    puts "\nElige una opcion valida"
+                                end
+                            end
+                            if op == 2
+                                op2=create_result_menu(resp)
+                                if op2 == 2
+                                    break
+                                end
+                            end
+                        end
+                    end
+                    op=create_result_menu(resp)
+                    if op == 2
+                        break
+                    end
                 when 7
                     puts "\nInserte el precio de compra:"
                     my_price = gets.chomp.to_i
                     my_method=create_comparison_condition()
-                    movies.scan(:price) { |x| x.method(my_method).call my_price }
-                    break
+                    resp=movies.scan(:price) { |x| x.method(my_method).call my_price }
+                    op=create_result_menu(resp)
+                    if op == 2
+                        break
+                    end
                 when 8
                     puts "\nInserte el precio de renta:"
                     my_price = gets.chomp.to_i
                     my_method=create_comparison_condition()
-                    movies.scan(:rent_price) { |x| x.method(my_method).call my_price }
-                    break
+                    resp=movies.scan(:rent_price) { |x| x.method(my_method).call my_price }
+                    op=create_result_menu(resp)
+                    if op == 2
+                        break
+                    end
                 else
                     puts "\nPrueba una opcion valida :3"
                 end
+                #movies=resp
             end
+            
         else
             puts "\nPrueba una opcion valida"
         end
@@ -394,7 +458,7 @@ end
 
 
 
-
+    
 
 class Main
     # FUNCTIONS
