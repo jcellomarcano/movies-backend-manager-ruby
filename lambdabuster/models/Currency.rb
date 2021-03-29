@@ -1,5 +1,9 @@
 class Currency
-    BOLIVAR_TO_BASE = 0.00053
+    # BASE EN ESTE MOMENTO ES DOLAR
+    # Estos son los valores que hay que
+    # multiplicar al valor para tener la cuenta en dolares
+
+    BOLIVAR_TO_BASE = 0.00000053
     DOLAR_TO_BASE = 1
     EURO_TO_BASE = 1.18
     BITCOIN_TO_BASE = 56083.4
@@ -18,21 +22,21 @@ class Currency
         base_temp = self.value*self.base
         case atom
         when :bolivares
-            resp = (base_temp / BOLIVAR_TO_BASE).round(2)
-            puts "#{resp} bolivares"
+            value = (base_temp / BOLIVAR_TO_BASE).round(2)
+            resp=Bolivar.new(value)
         when :dolars
-            resp = (base_temp / DOLAR_TO_BASE).round(2)
-            puts "#{resp} dolares"
+            value = (base_temp / DOLAR_TO_BASE).round(2)
+            resp=Dolar.new(value)
         when :euros
-            resp = (base_temp / EURO_TO_BASE).round(2)
-            puts "#{resp} euros"
+            value = (base_temp / EURO_TO_BASE).round(2)
+            resp=Euro.new(value)
         when :bitcoins
-            resp = (base_temp / BITCOIN_TO_BASE).round(2)
-            puts "#{resp} bitcoins"
+            value = (base_temp / BITCOIN_TO_BASE).round(2)
+            resp=Bitcoin.new(value)
         else
             raise "Solo se aceptan cambios a :dolars, :euros, :bolivares y :bitcoins"
         end
-        resp
+        resp.to_s
     end
 
     def compare(other)
@@ -48,57 +52,63 @@ class Currency
     end
 end
 
-module CurrencyType
-    BOLIVAR_TO_BASE = 0.00000053
-    DOLAR_TO_BASE = 1
-    EURO_TO_BASE = 1.18
-    BITCOIN_TO_BASE = 56083.4
 
-    class Bolivar < Currency
-        attr_accessor :starred_in
-        def initialize(value)
-            super(value,BOLIVAR_TO_BASE)
-        end
-        
+class Bolivar < Currency
+    attr_accessor :starred_in
+    def initialize(value)
+        super(value,BOLIVAR_TO_BASE)
     end
-
-    class Dolar < Currency
-        attr_accessor :directed
-        def initialize(value)
-            super(value,DOLAR_TO_BASE)
-        end
-
+    def to_s
+        puts "#{self.value} bolivares"
+        "#{self.value} bolivares"
     end
+end
 
-    class Euro < Currency
-        attr_accessor :starred_in
-        def initialize(value)
-            super(value,EURO_TO_BASE)
-        end
+class Dolar < Currency
+    attr_accessor :directed
+    def initialize(value)
+        super(value,DOLAR_TO_BASE)
     end
-
-    class Bitcoin < Currency
-        attr_accessor :directed
-        def initialize(value)
-            super(value,BITCOIN_TO_BASE)
-        end
-
+    def to_s
+        puts "#{self.value} dolars"
+        "#{self.value} dolars"
     end
-    
+end
+
+class Euro < Currency
+    attr_accessor :starred_in
+    def initialize(value)
+        super(value,EURO_TO_BASE)
+    end
+    def to_s
+        puts "#{self.value} euros"
+        "#{self.value} euros"
+    end
+end
+
+class Bitcoin < Currency
+    attr_accessor :directed
+    def initialize(value)
+        super(value,BITCOIN_TO_BASE)
+    end
+    def to_s
+        puts "#{self.value} bitcoins"
+        "#{self.value} bitcoins"
+    end
 end
 
 module CurrencyTypeExtension
     def dolars()
-        CurrencyType::Dolar.new(self)
+        Dolar.new(self)
     end
     def euros()
-        CurrencyType::Euro.new(self)
+        Euro.new(self)
     end
     def bolivares()
-        CurrencyType::Bolivar.new(self)
+        Bolivar.new(self)
     end
     def bitcoins()
-        CurrencyType::Bitcoin.new(self)
+        Bitcoin.new(self)
     end
 end
 
@@ -110,7 +120,7 @@ class Float
     include CurrencyTypeExtension
 end
 
-15.dolars.in(:euros)
-x=15.dolars.compare(12.euros)
-puts "#{x}"
-14000000.58.bolivares.in(:dolars)
+# 15.dolars.in(:euros)
+# x=15.dolars.compare(12.euros)
+# puts "#{x}"
+# 14000000.58.bolivares.in(:dolars)

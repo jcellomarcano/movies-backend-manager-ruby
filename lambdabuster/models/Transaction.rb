@@ -1,4 +1,4 @@
-module 
+
 class Transaction
     attr_accessor :movie, :type, :total, :date
         def initialize(movie, type)
