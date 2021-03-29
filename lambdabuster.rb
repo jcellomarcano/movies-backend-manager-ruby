@@ -360,9 +360,10 @@ def consult_movies(movies)
                     end
                 when 2
                     puts "\nInserte el año:"
+                    # puts movies
                     my_year = gets.chomp.to_i
                     my_method=create_comparison_condition()
-                    resp=movies.scan(:date) { |x| x.year.method(my_method).call my_year }
+                    resp=movies.scan(:release_date) { |x| x.year.method(my_method).call my_year }
                     op=create_result_menu(resp)
                     if op == 2
                         break
@@ -399,7 +400,7 @@ def consult_movies(movies)
                     puts "\nInserte la duracion:"
                     duration = gets.chomp.to_i
                     my_method=create_comparison_condition()
-                    resp=movies.scan(:date) { |x| x.method(my_method).call duration }
+                    resp=movies.scan(:runtime) { |x| x.method(my_method).call duration }
                     op=create_result_menu(resp)
                     if op == 2
                         break
