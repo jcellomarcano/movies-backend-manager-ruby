@@ -335,7 +335,84 @@ def consult_movies(movies):
     end
 end
 
+def myUser (user, moviesList, personsList)
+    if user.owned_movies.empty? && user.rented_movies.empty?
+        self.clear()
+        puts "No has realizado transacciones en #{"Lambdabuster".bold()}"
+    end
 
+    puts "Listado de Peliculas alquiladas: " + "\n" + "#{user.rented_movies}" 
+    puts "Listado de Peliculas compradas: " + "\n" + "#{user.owned_movies}" 
+
+    #menu for select option 
+    while true
+        puts "\n¿Quieres consultar alguna de tus películas?"
+        puts "1. Si"
+        puts "2. No"
+        option = gets.chomp.to_i   
+        case option 
+            when 1
+                while true 
+                    puts "\nIngresa el nombre de la película: \n"
+                    puts "Si deseas salir, escribe: salir"
+                    movie = gets.chomp
+                    case movie
+                        when "salir"
+                            break
+                        else
+                            a = user.owned_movies.scan(:name) {|x| x == movie}
+                            b = user.rented_movies.scan(:name) {|x| x == movie}
+                            if ( a.length == 0 ) && (b.length == 0)
+                                puts "Lo siento, no tienes esta pelicula, puedes intentar buscar otra"
+                                break
+                            else
+                                userMovie = (moviesList.scan(:name) {|name| name == movie}).first
+                                puts "\n#{userMovie}\n"
+                                while true
+                                    puts "\n¿Quieres conocer acerca de algun actor o director de esta peli?"
+                                    puts "Si"
+                                    puts "No"
+                                    response = gets.chomp
+
+                                    case response
+                                    when "Si"
+                                        while true 
+                                            puts "Ingrese nombre de actor o director"
+                                            response2 = gets.chomp
+                                            aux = false
+                                            while (! movie.actors.include? response2) && (! movie.directors.include? response2)
+                                                aux = true
+                                                puts "Persona no encontrada"
+                                            end
+                                            if not aux
+                                                puts "\n #{personsList[response2]}"
+                                                break
+                                            else
+                                                break
+                                            end
+
+                                        end
+                                    when "No"
+                                        break
+                                    else
+                                        puts "Ingresa una seleccion válida"
+                                    end
+                                end
+                            end
+
+                        end
+                    end
+                end
+                
+            when 2
+                break
+            else 
+                puts "Porfavor, escoge una selección válida"
+        end
+
+    end
+
+end
 
 
 
@@ -351,16 +428,7 @@ class Main
     @user = User.new
 
     #myUser
-    def myUser 
-        if @user.owned_movies.empty? && @user.rented_movies.empty?
-            self.clear()
-            puts "No has realizado transacciones en #{"Lambdabuster".bold()}"
-        end
-
-        puts "Listado de Peliculas alquiladas: " + "\n" + "#{@user.rented_movies}" 
-        puts "Listado de Peliculas compradas: " + "\n" + "#{@user.owned_movies}" 
-
-    end
+    
 
     # MAIN
     
