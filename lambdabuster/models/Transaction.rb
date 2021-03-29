@@ -1,3 +1,6 @@
+require '../modules/BuyOrderModule'
+require '../modules/RentOrderModule'
+require 'date'
 
 class Transaction
     attr_accessor :movie, :type, :total, :date
