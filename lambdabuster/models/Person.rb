@@ -10,7 +10,9 @@ class Person
     end
 
     def to_s 
-        @name  
+        "Name:".bold() + " #{@name}.\n" + 
+        "Birthday:".bold() + " #{@birthday}.\n" + 
+        "Nationality:".bold() + " #{@nationality}.\n" 
     end
 end
 

@@ -106,9 +106,9 @@ def loadMovie(movieObj)
     movie
 end
 
-# dir,act,b,d,g = readJson(line)
+dir,act,b,d,g = readJson(line)
 # puts "Directors #{dir}"
-# puts "Movies #{b}"
+puts "Movies #{b}"
 
 
 

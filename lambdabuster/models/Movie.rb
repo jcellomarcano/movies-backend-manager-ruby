@@ -20,6 +20,22 @@ class Movie
         @discount = discount
     
     end
+
+    def to_s
+        
+        hours = @runtime / 60
+        duration = "#{hours}h #{@runtime - (hours * 60)} min"
+        movieFormat = "#{@name} (#{@release_date.year}) - #{duration}\n"
+        movieFormat += "Genres: "
+        catList = @categories.first @categories.size - 1
+        catList.each { |categInstance| movieFormat += "#{categInstance}, " }    
+        movieFormat += @categories[-1].to_s + "\n"
+        movieFormat += "Directed by: "
+        movieFormat += @directors.to_s + "\n"
+        movieFormat += "Cast: "
+        movieFormat += @actors.to_s + "\n"
+        movieFormat
+    end
 end
 
 class Premiere 
@@ -56,6 +72,9 @@ class Premiere
     end
     def actors 
         @movie.actors
+    end
+    def to_s
+        @movie.to_s
     end
 end
 
@@ -94,6 +113,9 @@ class Discount
     end
     def discount 
         @movie.discount
+    end
+    def to_s
+        @movie.to_s
     end
 end
 
