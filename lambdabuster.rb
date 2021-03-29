@@ -490,45 +490,50 @@ def myUser (user, moviesList, personsList)
                 when "salir"
                     break
                 else
-                    a = user.owned_movies.scan(:name) {|x| x == movie}
-                    b = user.rented_movies.scan(:name) {|x| x == movie}
-                    if ( a.length == 0 ) && (b.length == 0)
-                        puts "Lo siento, no tienes esta pelicula, puedes intentar buscar otra"
-                        break
-                    else
-                        userMovie = (moviesList.scan(:name) {|name| name == movie}).first
-                        puts "\n#{userMovie}\n"
-                        while true
-                            puts "\n¿Quieres conocer acerca de algun actor o director de esta peli?"
-                            puts "Si"
-                            puts "No"
-                            response = gets.chomp
-
-                            case response
-                            when "Si"
-                                while true 
-                                    puts "Ingrese nombre de actor o director"
-                                    response2 = gets.chomp
-                                    aux = false
-                                    while (! movie.actors.include? response2) && (! movie.directors.include? response2)
-                                        aux = true
-                                        puts "Persona no encontrada"
+                    if user.owned_movies.length != 0 && user.rented_movies.length != 0
+                        a = user.owned_movies.scan(:name) {|x| x == movie}
+                        b = user.rented_movies.scan(:name) {|x| x == movie}
+                        if ( a.length == 0 ) && (b.length == 0)
+                            puts "Lo siento, no tienes esta pelicula, puedes intentar buscar otra"
+                            break
+                        else
+                            userMovie = (moviesList.scan(:name) {|name| name == movie}).first
+                            puts "\n#{userMovie}\n"
+                            while true
+                                puts "\n¿Quieres conocer acerca de algun actor o director de esta peli?"
+                                puts "Si"
+                                puts "No"
+                                response = gets.chomp
+    
+                                case response
+                                when "Si"
+                                    while true 
+                                        puts "Ingrese nombre de actor o director"
+                                        response2 = gets.chomp
+                                        aux = false
+                                        while (! movie.actors.include? response2) && (! movie.directors.include? response2)
+                                            aux = true
+                                            puts "Persona no encontrada"
+                                        end
+                                        if not aux
+                                            puts "\n #{personsList[response2]}"
+                                            break
+                                        else
+                                            break
+                                        end
+    
                                     end
-                                    if not aux
-                                        puts "\n #{personsList[response2]}"
-                                        break
-                                    else
-                                        break
-                                    end
-
-                                end
-                            when "No"
-                                break
-                            else
-                                puts "Ingresa una seleccion válida"
-                            end    
+                                when "No"
+                                    break
+                                else
+                                    puts "Ingresa una seleccion válida"
+                                end    
+                            end
                         end
+                    else
+                        puts "No tienes peliculas rentadas o compradas"
                     end
+                    
                 end
             end
         when 2
