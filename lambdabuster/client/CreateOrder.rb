@@ -48,14 +48,15 @@ def create_order(movies,type,user)
     else
         my_movie=nil
         movie.each do |x|
-            puts "\nPelicula encontrada: #{x.name}"
-            puts "Duracion: #{x.runtime}"
-            puts "Categorias: #{x.categories}"
-            puts "Fecha de lanzamiento: #{x.release_date}"
-            puts "Directors: #{x.directors}"
-            puts "Actores: #{x.actors}"
-            puts "Precio de compra: #{x.price}"
-            puts "Precio para rentar: #{x.rent_price}"
+            x.to_s
+            # puts "\nPelicula encontrada: #{x.name}"
+            # puts "Duracion: #{x.runtime}"
+            # puts "Categorias: #{x.categories}"
+            # puts "Fecha de lanzamiento: #{x.release_date}"
+            # puts "Directors: #{x.directors}"
+            # puts "Actores: #{x.actors}"
+            # puts "Precio de compra: #{x.price}"
+            # puts "Precio para rentar: #{x.rent_price}"
             my_movie=x
         end
         while true
