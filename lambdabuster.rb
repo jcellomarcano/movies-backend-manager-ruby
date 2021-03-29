@@ -498,9 +498,6 @@ def myUser (user, moviesList, personsList)
         puts "Vuela a consultar despues de haber rentado o adquirido una"
         return
     end
-
-    
-
     #menu for select option 
     while true
         puts "\n---------- * -----------"
@@ -519,52 +516,55 @@ def myUser (user, moviesList, personsList)
                 when "salir"
                     break
                 else
-                    if user.owned_movies.length != 0 && user.rented_movies.length != 0
-                        a = user.owned_movies.scan(:name) {|x| x == movie}
+                    a = SearchList.new
+                    b = SearchList.new
+                    if user.owned_movies.length == 0 && user.rented_movies.length != 0
                         b = user.rented_movies.scan(:name) {|x| x == movie}
-                        if ( a.length == 0 ) && (b.length == 0)
-                            puts "Lo siento, no tienes esta pelicula, puedes intentar buscar otra"
-                            break
-                        else
-                            userMovie = (moviesList.scan(:name) {|name| name == movie}).first
-                            puts "\n#{userMovie}\n"
-                            while true
-                                puts "\n---------- * -----------"
-                                puts "¿Quieres conocer acerca de algun actor o director de esta peli?"
-                                puts "Si"
-                                puts "No"
-                                response = gets.chomp
-    
-                                case response
-                                when "Si"
-                                    while true
-                                        puts "\n---------- * -----------" 
-                                        puts "grese nombre de actor o director"
-                                        response2 = gets.chomp
-                                        aux = false
-                                        while (! movie.actors.include? response2) && (! movie.directors.include? response2)
-                                            aux = true
-                                            puts "Persona no encontrada"
-                                        end
-                                        if not aux
-                                            puts "\n #{personsList[response2]}"
-                                            break
-                                        else
-                                            break
-                                        end
-    
-                                    end
-                                when "No"
-                                    break
-                                else
-                                    puts "Ingresa una seleccion válida"
-                                end    
-                            end
-                        end
-                    else
-                        puts "No tienes peliculas rentadas o compradas"
-                    end
+                    elsif user.owned_movies.length != 0 && user.rented_movies.length == 0
+                        a = user.owned_movies.scan(:name) {|x| x == movie}
                     
+                    else
+                        b = user.rented_movies.scan(:name) {|x| x == movie}
+                        a = user.owned_movies.scan(:name) {|x| x == movie}
+                    end
+
+                    if ( a.length == 0 ) && (b.length == 0)
+                        puts "Lo siento, no tienes esta pelicula, puedes intentar buscar otra"
+                        break
+                    else
+                        userMovie = (moviesList.scan(:name) {|name| name == movie}).head
+                        puts "\n#{userMovie}\n"
+                        while true
+                            puts "\n¿Quieres conocer acerca de algun actor o director de esta peli?"
+                            puts "Si"
+                            puts "No"
+                            response = gets.chomp
+
+                            case response
+                            when "Si"
+                                while true 
+                                    puts "Ingrese nombre de actor o director"
+                                    response2 = gets.chomp
+                                    aux = false
+                                    while (! userMovie.actors.include? response2) && (! userMovie.directors.include? response2)
+                                        aux = true
+                                        puts "Persona no encontrada"
+                                    end
+                                    if not aux
+                                        puts "\n #{personsList[response2]}"
+                                        break
+                                    else
+                                        break
+                                    end
+
+                                end
+                            when "No"
+                                break
+                            else
+                                puts "Ingresa una seleccion válida"
+                            end    
+                        end
+                    end
                 end
             end
         when 2

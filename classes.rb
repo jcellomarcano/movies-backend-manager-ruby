@@ -44,6 +44,9 @@ class SearchList
     def length
         @list.length
     end
+    def head
+        @list.first
+    end
 end
 
 class Person
@@ -55,9 +58,9 @@ class Person
     end
 
     def to_s 
-        "Name:".bold() + " #{@name}.\n" + 
-        "Birthday:".bold() + " #{@birthday}.\n" + 
-        "Nationality:".bold() + " #{@nationality}.\n" 
+        "Name:" + " #{@name}.\n" + 
+        "Birthday:" + " #{@birthday}.\n" + 
+        "Nationality:" + " #{@nationality}.\n" 
     end
 end
 
@@ -236,7 +239,8 @@ class Movie
         movieFormat += @directors.to_s + "\n"
         movieFormat += "Cast: "
         movieFormat += @actors.to_s + "\n"
-        movieFormat
+        movieFormat.gsub! '[',''
+        movieFormat.gsub! ']',''
     end
 end
 
