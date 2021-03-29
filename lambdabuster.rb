@@ -22,9 +22,12 @@ def create_order(movies,type,user)
     end
     puts "¿Que pelicula quiere #{my_name}?"
     puts "Inserta el nombre de la pelicula"
-    movie_name = gets.chomp.to_i
+    movie_name = gets.chomp
+    # puts movie_name
+    # puts movies
     movie=movies.scan(:name) { |x| x == movie_name}
-    if movie.length < 0
+    puts "Movie length #{movie.length}"
+    if movie.length == 0
         puts "\nSorry, no se encontró la pelicula :("
         while true
             puts "\nQue accion quiere realizar?"
@@ -37,7 +40,7 @@ def create_order(movies,type,user)
             option = gets.chomp.to_i
             case option
             when 1
-                resp=create_order(movies,type)
+                resp=create_order(movies,type,user)
                 break
             when 2
                 resp=1
@@ -55,6 +58,7 @@ def create_order(movies,type,user)
         end
     else
         my_movie=nil
+        # puts movie
         movie.each do |x|
             puts "\nPelicula encontrada: #{x.name}"
             puts "Duracion: #{x.runtime}"
@@ -73,6 +77,7 @@ def create_order(movies,type,user)
             puts "3. Euros"
             puts "4. Bitcoin"
             option = gets.chomp.to_i
+            # puts my_movie
             currency=my_movie.method(my_price).call.dolars
             case option
             when 1
@@ -98,9 +103,13 @@ def create_order(movies,type,user)
             case option
             when 1
                 transaction=Transaction.new(my_movie,type)
-                method(action).call(transaction)
-                user.method(store)<<my_movie
-                user.method("transactions")<<transaction
+                transaction.method(action).call(transaction)
+                if type == :rent
+                    user.rented_movies << my_movie
+                else
+                    user.owned_movies << my_movie
+                end
+                    user.transactions<<transaction
                 puts "\nLa pelicula se ha #{verb_in_past} con exito!!"
                 puts "Ya la tienes disponible en tu perfil"
                 puts "Que la disfrutes :D"
@@ -336,14 +345,16 @@ def consult_movies(movies)
 end
 
 def myUser (user, moviesList, personsList)
+    puts "RentedList #{user.rented_movies.length}"
     if user.owned_movies.length == 0 && user.rented_movies.length == 0
         puts "No has realizado transacciones en #{"Lambdabuster"}"
+        puts "Listado de Peliculas alquiladas: " + "\n" + "#{user.rented_movies}" 
+        puts "Listado de Peliculas compradas: " + "\n" + "#{user.owned_movies}" 
+        puts "Vuela a consultar despues de haber rentado o adquirido una"
+        return
     end
 
-    puts "Listado de Peliculas alquiladas: " + "\n" + "#{user.rented_movies}" 
-    puts "Listado de Peliculas compradas: " + "\n" + "#{user.owned_movies}" 
-    puts "Vuela a consultar despues de haber rentado o adquirido una"
-    return
+    
 
     #menu for select option 
     while true
@@ -437,7 +448,6 @@ class Main
     while true
         path = self.get_path()
         charge_data = readJson(path) #Funcion que carga los datos
-        # puts charge_data[3]
         if charge_data == false
             puts "\nLo sentimos, no pudimos cargar los datos :("
             puts "\nAsegurate de haber colocado la ruta retaliva"
@@ -474,8 +484,11 @@ class Main
         case option
         when 1
             puts "1. Crear nueva orden de alquiler"
+            create_order(@moviesList,:rent,@user)
         when 2
             puts "2. Crear nueva orden de compra"
+            create_order(@moviesList,:buy,@user)
+
         when 3
             puts "3. Mi Usuario"
             myUser(@user,@moviesList,@personsList)
