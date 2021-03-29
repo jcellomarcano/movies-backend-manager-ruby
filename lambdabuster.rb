@@ -46,7 +46,7 @@ def create_order(movies,type,user)
                 resp=1
                 break
             when 3
-                puts "3. Consultar peli"
+                consult_movies(movies)
                 break
             when 4
                 puts "\nGracias por usar Lambdabuster"
