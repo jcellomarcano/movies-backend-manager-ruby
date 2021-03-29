@@ -317,6 +317,7 @@ def consult_movies(movies)
             movies.each do |x|
                 x.name
             end
+            break
         when 2
             while true
                 puts "\n¿Que filtro quieres aplicar?"
@@ -606,17 +607,18 @@ class Main
 
         case option
         when 1
-            puts "1. Crear nueva orden de alquiler"
+            #puts "1. Crear nueva orden de alquiler"
             create_order(@moviesList,:rent,@user)
         when 2
-            puts "2. Crear nueva orden de compra"
+            #puts "2. Crear nueva orden de compra"
             create_order(@moviesList,:buy,@user)
 
         when 3
-            puts "3. Mi Usuario"
+            #puts "3. Mi Usuario"
             myUser(@user,@moviesList,@personsList)
         when 4
-            puts "4. Consultar catálogo"
+            #puts "4. Consultar catálogo"
+            consult_movies(@moviesList)
         when 5
             puts "\nGracias por usar Lambdabuster"
             puts "Nos vemos en la proxima :D"
