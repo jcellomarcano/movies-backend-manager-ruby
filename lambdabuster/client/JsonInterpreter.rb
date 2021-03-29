@@ -49,7 +49,7 @@ def readJson(path)
         raise "Error to load JSON"
     ensure # will always get executed
         if result 
-            return directorsList,actorsList
+            return directorsList,actorsList,moviesList,categories,personsList
         else 
             return false        
         end
