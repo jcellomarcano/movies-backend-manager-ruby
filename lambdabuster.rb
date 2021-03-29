@@ -1,6 +1,5 @@
 require 'json'
 require 'set'
-require 'wannabe_bool'
 require 'date'
 require_relative 'classes'
 
@@ -30,7 +29,8 @@ def create_order(movies,type,user)
     if movie.length == 0
         puts "\nSorry, no se encontró la pelicula :("
         while true
-            puts "\nQue accion quiere realizar?"
+            puts "\n---------- * -----------"
+            puts "Que accion quiere realizar?"
             puts "1. Intentar con otro nombre"
             puts "2. Volver al menu inicial"
             puts "3. Consultar peliculas"
@@ -71,7 +71,8 @@ def create_order(movies,type,user)
             my_movie=x
         end
         while true
-            puts "\nElige el metodo de pago que mejor se adapte:"
+            puts "\n---------- * -----------"
+            puts "Elige el metodo de pago que mejor se adapte:"
             puts "1. Dolares"
             puts "2. Bolivares"
             puts "3. Euros"
@@ -97,7 +98,8 @@ def create_order(movies,type,user)
         end
         puts "Precio: #{currency.to_s}"
         while true
-            puts "\n1. Continuar"
+            puts "\n---------- * -----------"
+            puts "1. Continuar"
             puts "2. Volver al menu inicial"
             option = gets.chomp.to_i
             case option
@@ -229,7 +231,8 @@ end
 # CONSULT MOVIES
 def create_comparison_condition()
     while true
-        puts "\n¿Con qué comparación?"
+        puts "\n---------- * -----------"
+        puts "¿Con qué comparación?"
         puts "1. Menor"
         puts "2. Menor o igual"
         puts "3. Igual"
@@ -263,9 +266,10 @@ end
 
 def create_coincidence_condition()
     while true
-        puts "\n¿Con qué comparación?"
+        puts "\n---------- * -----------"
+        puts "¿Con qué comparación?"
         puts "1. Coincidencia exacta"
-        puts "2. Coincidencia pacial"
+        puts "2. Coincidencia parcial"
         puts ""
         puts "Inserta el numero de la opcion"
         option = gets.chomp.to_i
@@ -279,23 +283,30 @@ def create_coincidence_condition()
         else
             puts "\nPrueba una opcion valida"
         end
-        resp
     end
+    resp
 end
 
 def create_result_menu(searchlist)
     while true
-        puts "\n1. Aplicar otro filtro"
+        puts "\n---------- * -----------"
+        puts "1. Aplicar otro filtro"
         puts "2. Buscar"
         puts ""
         puts "Inserta el numero de la opcion"
         option = gets.chomp.to_i
         case option
         when 1
-            movies=resp
+            movies=searchlist
             break
         when 2
-            resp.to_s
+            
+            if searchlist.length > 0
+                puts "\n**Resultado**"
+                puts searchlist
+            else
+                puts "\n**No se encontro resultado para este filtro"
+            end
             break
         else
             puts "\nPrueba una opcion valida :3"
@@ -306,22 +317,25 @@ end
 
 def consult_movies(movies)
     while true
-        puts "\nQue accion quiere realizar?"
+        puts "\n---------- * -----------"
+        puts "Que accion quiere realizar?"
         puts "1. Mostrar todas las peliculas"
         puts "2. Filtrar"
         puts ""
         puts "Inserta el numero de la opcion"
         option = gets.chomp.to_i
-        puts "Movies consult: #{movies}"
         case option
         when 1
-            movies.each do |x|
-                puts x
+            if movies.length > 0
+                puts "\n**Resultado**"
+                puts movies
+            else
+                puts "\n**No se encontro resultado para este filtro"
             end
-            break
         when 2
             while true
-                puts "\n¿Que filtro quieres aplicar?"
+                puts "\n---------- * -----------"
+                puts "¿Que filtro quieres aplicar?"
                 puts "1. Nombre"
                 puts "2. Año"
                 puts "3. Nombre del director"
@@ -371,9 +385,17 @@ def consult_movies(movies)
                     my_name = gets.chomp
                     my_method=create_coincidence_condition()
                     if my_method == "=="
-                        resp=movies.scan(:directors) { |x| x.include? my_name }
+                        puts "igualdad total"
+                        if movies.directors.include? my_name
+                            resp=movies.scan(:directors) { |x| x.include? my_name }
+                        else
+                            resp=SearchList.new()
+                        end
+                        puts resp
                     else
-                        resp=movies.scan(:directors) { |x| x.any? { |s| s.include? my_name } }
+                        puts "igualdad parcial"
+                        resp=movies.scan(:directors) { |x| x.include? my_name }
+                        puts resp
                     end
                     op=create_result_menu(resp)
                     if op == 2
@@ -391,7 +413,8 @@ def consult_movies(movies)
                 when 6
                     filter_categories=Set.new()
                     while true
-                        puts "\nSeleccione una categoria:"
+                        puts "\n---------- * -----------"
+                        puts "Seleccione una categoria:"
                         counter=1
                         my_categories.each do |x|
                             puts "#{counter}. #{x}"
@@ -405,7 +428,8 @@ def consult_movies(movies)
                             my_category=my_list_of_categies[option-1]
                             resp=movies.scan(:categories).select {|x| x.include? my_category}
                             while true
-                                puts "\nQuieres seleccionar otra categoria?"
+                                puts "\n---------- * -----------"
+                                puts "Quieres seleccionar otra categoria?"
                                 puts "1. Si"
                                 puts "2. No"
                                 puts ""
@@ -457,6 +481,7 @@ def consult_movies(movies)
                 end
                 #movies=resp
             end
+            break
             
         else
             puts "\nPrueba una opcion valida"
@@ -478,14 +503,16 @@ def myUser (user, moviesList, personsList)
 
     #menu for select option 
     while true
-        puts "\n¿Quieres consultar alguna de tus películas?"
+        puts "\n---------- * -----------"
+        puts "¿Quieres consultar alguna de tus películas?"
         puts "1. Si"
         puts "2. No"
         option = gets.chomp.to_i   
         case option 
         when 1
-            while true 
-                puts "\nIngresa el nombre de la película: \n"
+            while true
+                puts "\n---------- * -----------" 
+                puts "Ingresa el nombre de la película: \n"
                 puts "Si deseas salir, escribe: salir"
                 movie = gets.chomp
                 case movie
@@ -502,15 +529,17 @@ def myUser (user, moviesList, personsList)
                             userMovie = (moviesList.scan(:name) {|name| name == movie}).first
                             puts "\n#{userMovie}\n"
                             while true
-                                puts "\n¿Quieres conocer acerca de algun actor o director de esta peli?"
+                                puts "\n---------- * -----------"
+                                puts "¿Quieres conocer acerca de algun actor o director de esta peli?"
                                 puts "Si"
                                 puts "No"
                                 response = gets.chomp
     
                                 case response
                                 when "Si"
-                                    while true 
-                                        puts "Ingrese nombre de actor o director"
+                                    while true
+                                        puts "\n---------- * -----------" 
+                                        puts "grese nombre de actor o director"
                                         response2 = gets.chomp
                                         aux = false
                                         while (! movie.actors.include? response2) && (! movie.directors.include? response2)
@@ -571,6 +600,7 @@ class Main
     puts "Bienvenido a Lambdabuster\n"
 
     while true
+        puts "\n---------- * -----------"
         path = self.get_path()
         charge_data = readJson(path) #Funcion que carga los datos
         if charge_data == false
@@ -596,7 +626,8 @@ class Main
     end
 
     while true
-        puts "\nQue accion quiere realizar?"
+        puts "\n---------- * -----------"
+        puts "Que accion quiere realizar?"
         puts "1. Crear nueva orden de alquiler"
         puts "2. Crear nueva orden de compra"
         puts "3. Mi Usuario"
