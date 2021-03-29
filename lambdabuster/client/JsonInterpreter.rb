@@ -4,7 +4,7 @@ require 'wannabe_bool'
 require_relative '../models/Person'
 require_relative '../models/SearchList'
 require_relative '../models/Movie'
-line = "./test.json"
+line = "../../test.json"
 def readJson(path) 
     @directorsList = {}
     @actorsList = {}
@@ -63,7 +63,7 @@ def readJson(path)
         # puts "Movies #{@moviesList}"
 
         if result 
-            return @directorsList,@actorsList,@moviesList,@categories,@personsList
+            return @personsList
         else 
             return false
         end
@@ -107,6 +107,7 @@ def loadMovie(movieObj)
 end
 
 
-
+c = readJson(line)
+puts c
 
 

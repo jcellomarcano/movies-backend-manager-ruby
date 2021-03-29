@@ -285,7 +285,7 @@ def create_result_menu()
     end
 end
 
-def consult_movies(movies):
+def consult_movies(movies)
     while true
         puts "\nQue accion quiere realizar?"
         puts "1. Mostrar todas las peliculas"
@@ -336,13 +336,14 @@ def consult_movies(movies):
 end
 
 def myUser (user, moviesList, personsList)
-    if user.owned_movies.empty? && user.rented_movies.empty?
-        self.clear()
-        puts "No has realizado transacciones en #{"Lambdabuster".bold()}"
+    if user.owned_movies.length == 0 && user.rented_movies.length == 0
+        puts "No has realizado transacciones en #{"Lambdabuster"}"
     end
 
     puts "Listado de Peliculas alquiladas: " + "\n" + "#{user.rented_movies}" 
     puts "Listado de Peliculas compradas: " + "\n" + "#{user.owned_movies}" 
+    puts "Vuela a consultar despues de haber rentado o adquirido una"
+    return
 
     #menu for select option 
     while true
@@ -351,67 +352,62 @@ def myUser (user, moviesList, personsList)
         puts "2. No"
         option = gets.chomp.to_i   
         case option 
-            when 1
-                while true 
-                    puts "\nIngresa el nombre de la película: \n"
-                    puts "Si deseas salir, escribe: salir"
-                    movie = gets.chomp
-                    case movie
-                        when "salir"
-                            break
-                        else
-                            a = user.owned_movies.scan(:name) {|x| x == movie}
-                            b = user.rented_movies.scan(:name) {|x| x == movie}
-                            if ( a.length == 0 ) && (b.length == 0)
-                                puts "Lo siento, no tienes esta pelicula, puedes intentar buscar otra"
-                                break
-                            else
-                                userMovie = (moviesList.scan(:name) {|name| name == movie}).first
-                                puts "\n#{userMovie}\n"
-                                while true
-                                    puts "\n¿Quieres conocer acerca de algun actor o director de esta peli?"
-                                    puts "Si"
-                                    puts "No"
-                                    response = gets.chomp
+        when 1
+            while true 
+                puts "\nIngresa el nombre de la película: \n"
+                puts "Si deseas salir, escribe: salir"
+                movie = gets.chomp
+                case movie
+                when "salir"
+                    break
+                else
+                    a = user.owned_movies.scan(:name) {|x| x == movie}
+                    b = user.rented_movies.scan(:name) {|x| x == movie}
+                    if ( a.length == 0 ) && (b.length == 0)
+                        puts "Lo siento, no tienes esta pelicula, puedes intentar buscar otra"
+                        break
+                    else
+                        userMovie = (moviesList.scan(:name) {|name| name == movie}).first
+                        puts "\n#{userMovie}\n"
+                        while true
+                            puts "\n¿Quieres conocer acerca de algun actor o director de esta peli?"
+                            puts "Si"
+                            puts "No"
+                            response = gets.chomp
 
-                                    case response
-                                    when "Si"
-                                        while true 
-                                            puts "Ingrese nombre de actor o director"
-                                            response2 = gets.chomp
-                                            aux = false
-                                            while (! movie.actors.include? response2) && (! movie.directors.include? response2)
-                                                aux = true
-                                                puts "Persona no encontrada"
-                                            end
-                                            if not aux
-                                                puts "\n #{personsList[response2]}"
-                                                break
-                                            else
-                                                break
-                                            end
-
-                                        end
-                                    when "No"
+                            case response
+                            when "Si"
+                                while true 
+                                    puts "Ingrese nombre de actor o director"
+                                    response2 = gets.chomp
+                                    aux = false
+                                    while (! movie.actors.include? response2) && (! movie.directors.include? response2)
+                                        aux = true
+                                        puts "Persona no encontrada"
+                                    end
+                                    if not aux
+                                        puts "\n #{personsList[response2]}"
                                         break
                                     else
-                                        puts "Ingresa una seleccion válida"
+                                        break
                                     end
-                                end
-                            end
 
+                                end
+                            when "No"
+                                break
+                            else
+                                puts "Ingresa una seleccion válida"
+                            end    
                         end
                     end
                 end
-                
-            when 2
-                break
-            else 
-                puts "Porfavor, escoge una selección válida"
+            end
+        when 2
+            break
+        else 
+            puts "Porfavor, escoge una selección válida"
         end
-
     end
-
 end
 
 
@@ -441,6 +437,7 @@ class Main
     while true
         path = self.get_path()
         charge_data = readJson(path) #Funcion que carga los datos
+        # puts charge_data[3]
         if charge_data == false
             puts "\nLo sentimos, no pudimos cargar los datos :("
             puts "\nAsegurate de haber colocado la ruta retaliva"
@@ -454,6 +451,11 @@ class Main
             end
         else
             puts "\nDatos cargados con exito :D"
+            @directorsList = charge_data[0] 
+            @actorsList = charge_data[1]
+            @moviesList = charge_data[2] 
+            @personsList = charge_data[4] 
+            @categories = charge_data[3]
             break
         end
     end
@@ -476,7 +478,7 @@ class Main
             puts "2. Crear nueva orden de compra"
         when 3
             puts "3. Mi Usuario"
-            
+            myUser(@user,@moviesList,@personsList)
         when 4
             puts "4. Consultar catálogo"
         when 5
