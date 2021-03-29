@@ -388,9 +388,9 @@ def consult_movies(movies)
                     if my_method == "=="
                         puts "igualdad total"
                         if movies.directors.include? my_name
-                            resp=movies.scan(:directors) { |x| x.include? my_name }
+                            resp=movies.scan(:actors) { |x| x.include? my_name }
                         else
-                            resp=SearchList.new()
+                            resp=movies.scan(:actors) { |x| x.any? { |s| s.include? my_name } }
                         end
                         puts resp
                     else
