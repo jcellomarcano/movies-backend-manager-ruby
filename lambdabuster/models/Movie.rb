@@ -103,18 +103,4 @@ class Numeric
     end
 end
 
-movie = Movie.new("Hola", 120, "GustoDeGordita",Date.parse("2020-07-05"),
-"Juan", "juano y juana", 11.02, 1, true,50)
 
-if movie.premiere
-    premiere = Premiere.new(movie)
-
-    puts premiere.name
-    puts premiere.price
-else
-    premiere = Discount.new(movie)
-
-    puts premiere.name
-    puts premiere.price
-    
-end

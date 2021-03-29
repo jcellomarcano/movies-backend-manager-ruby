@@ -31,10 +31,6 @@ class Director < Person
 
 end
 
-# director = PersonType::Director.new("LaGordita", 1996-12-31,"VE")
-# puts director.name
-# puts director.birthday
-# puts director.nationality
 
 
 
