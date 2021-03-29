@@ -262,10 +262,15 @@ def create_coincidence_condition()
         option = gets.chomp.to_i
         case option
         when 1
+            resp = "=="
+            break
         when 2
+            resp = "include?"
+            break
         else
             puts "\nPrueba una opcion valida"
         end
+        resp
     end
 end
 
@@ -296,7 +301,7 @@ def consult_movies(movies):
         case option
         when 1
             movies.each do |x|
-                x.to_s
+                x.name
             end
         when 2
             while true
@@ -315,15 +320,64 @@ def consult_movies(movies):
 
                 case option
                 when 1
-                    resp=create_order(movies,type)
+                    puts "\nInserte el nombre:"
+                    my_name = gets.chomp
+                    my_method=create_coincidence_condition()
+                    movies.scan(:name) { |x| x.method(my_method).call my_name }
                     break
                 when 2
-                    resp=1
+                    puts "\nInserte el año:"
+                    my_year = gets.chomp.to_i
+                    my_method=create_comparison_condition()
+                    movies.scan(:date) { |x| x.year.method(my_method).call my_year }
                     break
                 when 3
-                    puts "3. Consultar peli"
+                    puts "\nInserte el nombre del director:"
+                    my_name = gets.chomp
+                    my_method=create_coincidence_condition()
+                    if my_method == "=="
+                        movies.scan(:directors) { |x| x.include? my_name }
+                    else
+                        movies.scan(:directors) { |x| x.any? { |s| s.include? my_name } }
+                    end
                     break
                 when 4
+                    puts "\nInserte el nombre del actor:"
+                    my_name = gets.chomp
+                    my_method=create_coincidence_condition()
+                    if my_method == "=="
+                        movies.scan(:directors) { |x| x.include? my_name }
+                    else
+                        movies.scan(:directors) { |x| x.any? { |s| s.include? my_name } }
+                    end
+                    break
+                when 5
+                    puts "\nInserte la duracion:"
+                    duration = gets.chomp.to_i
+                    my_method=create_comparison_condition()
+                    movies.scan(:date) { |x| x.method(my_method).call duration }
+                    break
+                when 6
+                    # puts "\nInserte el nombre del actor:"
+                    # my_name = gets.chomp
+                    # my_method=create_coincidence_condition()
+                    # if my_method == "=="
+                    #     movies.scan(:directors) { |x| x.include? my_name }
+                    # else
+                    #     movies.scan(:directors) { |x| x.any? { |s| s.include? my_name } }
+                    # end
+                    # break
+                when 7
+                    puts "\nInserte el precio de compra:"
+                    my_price = gets.chomp.to_i
+                    my_method=create_comparison_condition()
+                    movies.scan(:price) { |x| x.method(my_method).call my_price }
+                    break
+                when 8
+                    puts "\nInserte el precio de renta:"
+                    my_price = gets.chomp.to_i
+                    my_method=create_comparison_condition()
+                    movies.scan(:rent_price) { |x| x.method(my_method).call my_price }
                     break
                 else
                     puts "\nPrueba una opcion valida :3"
