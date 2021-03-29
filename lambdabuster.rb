@@ -426,10 +426,12 @@ class Main
         path = gets.chomp
     end
     @user = User.new
-
-    #myUser
-    
-
+    @directorsList = {}
+    @actorsList = {}
+    @moviesList = SearchList.new()
+    @moviesChecker = {}
+    @personsList = {}
+    @categories = Set.new
     # MAIN
     
 
@@ -474,6 +476,7 @@ class Main
             puts "2. Crear nueva orden de compra"
         when 3
             puts "3. Mi Usuario"
+            
         when 4
             puts "4. Consultar catálogo"
         when 5
@@ -485,8 +488,5 @@ class Main
         end
 
     end
-
-
-
     
 end
